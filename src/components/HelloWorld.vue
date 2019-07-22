@@ -1,11 +1,16 @@
 <template>
   <div class="hello">
-      <ion-list>
-        <ion-item v-for="post in posts" :key="post.data.id">
-          <img :src="post.data.thumbnail" alt="thumb" class="thumbnail">
-          <ion-label>{{ post.data.title }}</ion-label>
-        </ion-item>
-      </ion-list>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Reddit clone</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-list>
+      <ion-item v-for="post in posts" :key="post.data.id" @click="handleClick(post.data.preview.images[0].source.url)">
+        <img :src="post.data.thumbnail" alt="thumb" class="thumbnail">
+        <ion-label>{{ post.data.title }}</ion-label>
+      </ion-item>
+    </ion-list>
   </div>
 </template>
 
@@ -33,12 +38,13 @@ export default {
     }
   },
   methods: {
-    // handleClick() {
+    handleClick(imageSrc) {
     //   alert(this.myInput);
       // this.myInput permet de préciser que l'on veut spécifiquement la valeur de myInput qui a été modifié par le handleClick
+      this.$router.push({ name: 'about', params: {imageSrc}})
     }
   }
-
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
